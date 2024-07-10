@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import rent.property.RentIt.entity.User;
+import rent.property.RentIt.entity.UserDto;
 import rent.property.RentIt.service.UserInterface;
 
 @RestController
@@ -23,8 +24,8 @@ public class UserController {
 	private UserInterface userService;
 	
 	@PostMapping("/addUser")
-    public User addUser(@RequestBody User user) {
-    	return userService.addUser(user);
+    public User addUser(@RequestBody UserDto userDto) {
+    	return userService.addUser(userDto);
     }
 	
 	@GetMapping("/getUsers")

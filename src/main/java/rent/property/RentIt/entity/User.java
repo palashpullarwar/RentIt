@@ -2,18 +2,21 @@ package rent.property.RentIt.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "app_user")
 public class User {
 
@@ -31,5 +34,11 @@ public class User {
 	private String state;
 	private String city;
 	private String country;
+	
+	private List<String> roles= new ArrayList<>();
+	
+//	@ManyToOne
+//	@JoinColumn(name = "rental_id")
+//	private RentalDetails rentalDetails;
 	
 }

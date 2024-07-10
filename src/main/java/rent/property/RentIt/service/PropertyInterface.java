@@ -2,11 +2,12 @@ package rent.property.RentIt.service;
 
 import java.util.List;
 import rent.property.RentIt.entity.Property;
+import rent.property.RentIt.entity.PropertyDto;
 
 
 public interface PropertyInterface {
 
-    public Property addProperty(Property property);
+    public Property addProperty(PropertyDto propertyDto);
 	
 	public List<Property> getProperties();
 	

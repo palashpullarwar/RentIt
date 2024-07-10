@@ -2,11 +2,12 @@ package rent.property.RentIt.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import rent.property.RentIt.entity.User;
+import rent.property.RentIt.entity.UserDto;
+import rent.property.RentIt.exception.UserNotFoundException;
 import rent.property.RentIt.repository.UserRepository;
 import rent.property.RentIt.service.UserInterface;
 
@@ -16,9 +17,20 @@ public class UserServiceImpl implements UserInterface{
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	
 	@Override
-	public User addUser(User user) {
+	public User addUser(UserDto userDto) {
+		
+		String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+		
+		User user = User.builder().address(userDto.getAddress()).age(userDto.getAge()).city(userDto.getCity())
+				.contact(userDto.getContact()).country(userDto.getCountry()).email(userDto.getEmail())
+				.firstName(userDto.getFirstName()).lastName(userDto.getLastName()).password(encodedPassword)
+				.state(userDto.getState()).username(userDto.getUsername()).build();
 		return userRepository.save(user);
+		
 	}
 
 	@Override
@@ -54,8 +66,9 @@ public class UserServiceImpl implements UserInterface{
 
 	@Override
 	public User getUserById(Integer userId) {
+
 		Optional<User> user = userRepository.findById(userId);
-		return user.get();
+		return  user.orElseThrow(() -> new UserNotFoundException("User not found with Id " + userId));
 	}
 
 }

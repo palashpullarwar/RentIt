@@ -3,10 +3,11 @@ package rent.property.RentIt.service;
 import java.util.List;
 
 import rent.property.RentIt.entity.User;
+import rent.property.RentIt.entity.UserDto;
 
 public interface UserInterface {
 
-	public User addUser(User user);
+	public User addUser(UserDto userDto);
 	
 	public List<User> getUsers();
 	
